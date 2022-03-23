@@ -3,7 +3,7 @@ from ai import AI
 
 class Game:
     def __init__(self):
-        self.player = None
+        self.player = Player()
         self.opponent = None
     
     def run_game(self):
@@ -12,7 +12,7 @@ class Game:
         pass
 
     def display_welcome(self):
-        pass
+        print("Hello! Welcome to Rock, Paper, Scissors, Lizard, Spock")
 
     def battle(self):
         pass
@@ -24,7 +24,11 @@ class Game:
         pass
 
     def choose_game_mode(self):
-        pass
+        game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2")
+        if game_choice == "1":
+            self.opponent = AI()
+        elif game_choice == "2":
+            self.opponent = Player()
 
     def display_winner(self):
         pass
