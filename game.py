@@ -47,23 +47,17 @@ class Game:
             winner = self.choose_winner()
             print(f'{winner.name} won the round')
             winner.score += 1
-            print(winner.score)
+            
         
         
         # self.player.gesture_choice    self.opponent.gesture_choice
 
     def choose_winner(self):
-        opt1 = "rock"
-        opt2 = "paper"
+        opt1 = self.player.gesture_choice
+        opt2 = self.opponent.gesture_choice
         win = f'{opt1}{opt2}'
-        print(win)
+        return self.combinations[win]
         
-
-    def player_turn(self):
-        pass
-
-    def opponent_turn(self):
-        pass
 
     def choose_game_mode(self):
         game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2")
@@ -76,5 +70,5 @@ class Game:
         pass
 
 rpsls = Game()
-print(rpsls.choose_winner())
+rpsls.run_game()
 

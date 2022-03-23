@@ -10,9 +10,9 @@ class Player:
         while True:
             for each in self.gestures:
                 print(each)
-            cho = input("Choose an option")
-            if cho in self.gestures:
-                self.gesture_choice = each
+            choice = input("Choose an option")
+            if choice in self.gestures:
+                self.gesture_choice = choice
                 break
             else:
                 print("Oops! Please type one of the options!")
