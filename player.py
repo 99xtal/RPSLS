@@ -1,6 +1,6 @@
 class Player:
     def __init__(self):
-        self.gestures = ['Rock', 'Paper', 'Scissors', 'Lizard', 'Spock']
+        self.gestures = ['rock', 'paper', 'scissors', 'lizard', 'spock']
         self.gesture_choice = None
         self.score = 0
 
@@ -15,6 +15,3 @@ class Player:
                 break
             else:
                 print("Oops! Please type one of the options!")
-
-play = Player()
-play.choose_gesture()

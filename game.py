@@ -5,17 +5,52 @@ class Game:
     def __init__(self):
         self.player = Player()
         self.opponent = None
+        self.combinations = {"rockrock": None,
+                            "rockpaper": self.opponent,
+                            "rockscissors": self.player,
+                            "rocklizard": self.player,
+                            "rockspock": self.opponent,
+                            "paperrock": self.player,
+                            "paperpaper": None,
+                            "paperscissors": self.opponent,
+                            "paperlizard": self.opponent,
+                            "paperspock": self.player,
+                            "scissorsrock": self.opponent,
+                            "scissorspaper": self.player,
+                            "scissorsscissors": None,
+                            "scissorslizard": self.player,
+                            "scissorsspock": self.opponent,
+                            "lizardrock": self.opponent,
+                            "lizardpaper": self.player,
+                            "lizardscissors": self.opponent,
+                            "lizardlizard": None,
+                            "lizardspock": self.player,
+                            "spockrock": self.player,
+                            "spockpaper": self.opponent,
+                            "spockscissors": self.player,
+                            "spocklizard": self.opponent,
+                            "spockspock": None}
     
     def run_game(self):
-        # display_welcome()
-        # choose_game_mode()
-        pass
+        self.display_welcome()
+        self.choose_game_mode()
+        self.battle()
+        self.display_winner()
 
     def display_welcome(self):
         print("Hello! Welcome to Rock, Paper, Scissors, Lizard, Spock")
 
     def battle(self):
-        pass
+        self.player.choose_gesture()
+        self.opponent.choose_gesture()
+        
+        # self.player.gesture_choice    self.opponent.gesture_choice
+
+    def choose_winner(self):
+        opt1 = self.player.gesture_choice
+        opt2 = self.opponent.gesture_choice
+
+        
 
     def player_turn(self):
         pass
@@ -32,3 +67,6 @@ class Game:
 
     def display_winner(self):
         pass
+
+rpsls = Game()
+rpsls.run_game()
