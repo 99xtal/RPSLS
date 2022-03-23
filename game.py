@@ -3,7 +3,7 @@ from ai import AI
 
 class Game:
     def __init__(self):
-        self.player = Player()
+        self.player = Player("Player 1")
         self.opponent = None
         self.combinations = {"rockrock": None,
                             "rockpaper": self.opponent,
@@ -41,15 +41,22 @@ class Game:
         print("Hello! Welcome to Rock, Paper, Scissors, Lizard, Spock")
 
     def battle(self):
-        self.player.choose_gesture()
-        self.opponent.choose_gesture()
+        while self.player.score < 2 and self.opponent.score < 2:
+            self.player.choose_gesture()
+            self.opponent.choose_gesture()
+            winner = self.choose_winner()
+            print(f'{winner.name} won the round')
+            winner.score += 1
+            print(winner.score)
+        
         
         # self.player.gesture_choice    self.opponent.gesture_choice
 
     def choose_winner(self):
-        opt1 = self.player.gesture_choice
-        opt2 = self.opponent.gesture_choice
-
+        opt1 = "rock"
+        opt2 = "paper"
+        win = f'{opt1}{opt2}'
+        print(win)
         
 
     def player_turn(self):
@@ -63,10 +70,11 @@ class Game:
         if game_choice == "1":
             self.opponent = AI()
         elif game_choice == "2":
-            self.opponent = Player()
+            self.opponent = Player("Player 2")
 
     def display_winner(self):
         pass
 
 rpsls = Game()
-rpsls.run_game()
+print(rpsls.choose_winner())
+
