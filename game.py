@@ -4,7 +4,7 @@ from ai import AI
 class Game:
     def __init__(self):
         self.player = Player("Player 1")
-        self.opponent = Player("Player 2")
+        self.opponent = None
         self.combinations = {}
     
     def run_game(self):
@@ -22,9 +22,9 @@ class Game:
             self.opponent.choose_gesture()
             winner = self.choose_winner()
             if winner == None:
-                print(f'Nobody wins!')
+                print(f'\nNobody wins!')
             else:
-                print(f'{winner.name} won the round')
+                print(f'\n{winner.name} won the round')
                 winner.score += 1
                 print(f'{winner.name} has a score of {winner.score}')
         
@@ -64,17 +64,22 @@ class Game:
         
 
     def choose_game_mode(self):
-        game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2")
-        if game_choice == "1":
-            self.opponent = AI()
-        elif game_choice == "2":
-            self.opponent = Player("Player 2")
+        while True:
+            game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2: ")
+            if game_choice == "1":
+                self.opponent = AI()
+                break
+            elif game_choice == "2":
+                self.opponent = Player("Player 2")
+                break
+            else:
+                print("Please choose (1) or (2)")
 
     def display_winner(self):
         if self.player.score == 2:
-            print("Player 1 wins")
+            print("Player 1 wins!\n")
         if self.opponent.score == 2:
-            print("Player 2 wins")
+            print("Player 2 wins!\n")
 
 rpsls = Game()
 rpsls.run_game()

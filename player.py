@@ -8,9 +8,10 @@ class Player:
     def choose_gesture(self):
         # input choice function
         while True:
+            print("\nOPTIONS:")
             for each in self.gestures:
                 print(each)
-            choice = input("Choose an option")
+            choice = input(f"\n{self.name}, choose an option: ").lower()
             if choice in self.gestures:
                 self.gesture_choice = choice
                 break
