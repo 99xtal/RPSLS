@@ -4,7 +4,37 @@ from ai import AI
 class Game:
     def __init__(self):
         self.player = Player("Player 1")
-        self.opponent = None
+        self.opponent = Player("Player 2")
+        self.combinations = {}
+    
+    def run_game(self):
+        self.display_welcome()
+        self.choose_game_mode()
+        self.battle()
+        self.display_winner()
+
+    def display_welcome(self):
+        print("Hello! Welcome to Rock, Paper, Scissors, Lizard, Spock")
+
+    def battle(self):
+        while self.player.score < 2 and self.opponent.score < 2:
+            self.player.choose_gesture()
+            self.opponent.choose_gesture()
+            winner = self.choose_winner()
+            if winner == None:
+                print(f'Nobody wins!')
+            else:
+                print(f'{winner.name} won the round')
+                winner.score += 1
+                print(f'{winner.name} has a score of {winner.score}')
+        
+        
+        # self.player.gesture_choice    self.opponent.gesture_choice
+
+    def choose_winner(self):
+        opt1 = self.player.gesture_choice
+        opt2 = self.opponent.gesture_choice
+        win = f'{opt1}{opt2}'
         self.combinations = {"rockrock": None,
                             "rockpaper": self.opponent,
                             "rockscissors": self.player,
@@ -30,32 +60,6 @@ class Game:
                             "spockscissors": self.player,
                             "spocklizard": self.opponent,
                             "spockspock": None}
-    
-    def run_game(self):
-        self.display_welcome()
-        self.choose_game_mode()
-        self.battle()
-        self.display_winner()
-
-    def display_welcome(self):
-        print("Hello! Welcome to Rock, Paper, Scissors, Lizard, Spock")
-
-    def battle(self):
-        while self.player.score < 2 and self.opponent.score < 2:
-            self.player.choose_gesture()
-            self.opponent.choose_gesture()
-            winner = self.choose_winner()
-            print(f'{winner.name} won the round')
-            winner.score += 1
-            
-        
-        
-        # self.player.gesture_choice    self.opponent.gesture_choice
-
-    def choose_winner(self):
-        opt1 = self.player.gesture_choice
-        opt2 = self.opponent.gesture_choice
-        win = f'{opt1}{opt2}'
         return self.combinations[win]
         
 
@@ -67,7 +71,10 @@ class Game:
             self.opponent = Player("Player 2")
 
     def display_winner(self):
-        pass
+        if self.player.score == 2:
+            print("Player 1 wins")
+        if self.opponent.score == 2:
+            print("Player 2 wins")
 
 rpsls = Game()
 rpsls.run_game()
