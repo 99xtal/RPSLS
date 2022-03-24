@@ -10,13 +10,17 @@ class Human(Player):
 
     def choose_gesture(self):
         # input choice function
-        while True:
-            print("\nOPTIONS:")
-            for each in self.gestures:
-                print(each)
+        counter = 0
+        while counter != 1:
+            self.print_gestures()
+
             choice = input(f"\n{self.name}, choose an option: ").lower()
-            if choice in self.gestures:
-                self.gesture_choice = choice
-                break
-            else:
+
+            for gesture in self.gestures:
+                if choice == gesture.name:
+                    self.gesture_choice = gesture
+                    counter = 1
+
+            if self.gesture_choice.name != choice:
                 print("Oops! Please type one of the options!")
+

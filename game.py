@@ -1,16 +1,15 @@
 from human import Human
 from ai import AI
+from rock import Rock
 
 class Game:
     def __init__(self):
         self.player = Human("Player 1")
         self.opponent = Human("Player 2")
-        self.combinations = {}
     
     def run_game(self):
         self.display_welcome()
         self.choose_game_mode()
-        self.set_combinations()
         self.battle()
         self.display_winner()
 
@@ -32,39 +31,16 @@ class Game:
             winner.score += 1
             print(f'{winner.name} has a score of {winner.score}')
 
-
     def choose_winner(self):
-        opt1 = self.player.gesture_choice
-        opt2 = self.opponent.gesture_choice
-        win = f'{opt1}{opt2}'
-        return self.combinations[win]
-        
-    def set_combinations(self):
-        self.combinations = {"rockrock": None,
-                            "rockpaper": self.opponent,
-                            "rockscissors": self.player,
-                            "rocklizard": self.player,
-                            "rockspock": self.opponent,
-                            "paperrock": self.player,
-                            "paperpaper": None,
-                            "paperscissors": self.opponent,
-                            "paperlizard": self.opponent,
-                            "paperspock": self.player,
-                            "scissorsrock": self.opponent,
-                            "scissorspaper": self.player,
-                            "scissorsscissors": None,
-                            "scissorslizard": self.player,
-                            "scissorsspock": self.opponent,
-                            "lizardrock": self.opponent,
-                            "lizardpaper": self.player,
-                            "lizardscissors": self.opponent,
-                            "lizardlizard": None,
-                            "lizardspock": self.player,
-                            "spockrock": self.player,
-                            "spockpaper": self.opponent,
-                            "spockscissors": self.player,
-                            "spocklizard": self.opponent,
-                            "spockspock": None}
+        player_gesture = self.player.gesture_choice
+        opponent_gesture = self.opponent.gesture_choice
+
+        if opponent_gesture.name in player_gesture.loses_to:
+            return self.opponent
+        elif opponent_gesture.name in player_gesture.wins_against:
+            return self.player
+        else:
+            return None
     
     def choose_game_mode(self):
         while True:
