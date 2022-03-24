@@ -3,13 +3,14 @@ from ai import AI
 
 class Game:
     def __init__(self):
-        self.player = Player("Player 1")
+        self.player = Player()
         self.opponent = None
         self.combinations = {}
     
     def run_game(self):
         self.display_welcome()
         self.choose_game_mode()
+        self.set_combinations()
         self.battle()
         self.display_winner()
 
@@ -27,14 +28,14 @@ class Game:
                 print(f'\n{winner.name} won the round')
                 winner.score += 1
                 print(f'{winner.name} has a score of {winner.score}')
-        
-        
-        # self.player.gesture_choice    self.opponent.gesture_choice
 
     def choose_winner(self):
         opt1 = self.player.gesture_choice
         opt2 = self.opponent.gesture_choice
         win = f'{opt1}{opt2}'
+        return self.combinations[win]
+        
+    def set_combinations(self):
         self.combinations = {"rockrock": None,
                             "rockpaper": self.opponent,
                             "rockscissors": self.player,
@@ -60,27 +61,25 @@ class Game:
                             "spockscissors": self.player,
                             "spocklizard": self.opponent,
                             "spockspock": None}
-        return self.combinations[win]
-        
-
+    
     def choose_game_mode(self):
         while True:
             game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2: ")
+            print("Player 1, please enter your name.")
+            self.player.set_name()
             if game_choice == "1":
                 self.opponent = AI()
                 break
             elif game_choice == "2":
-                self.opponent = Player("Player 2")
+                self.opponent = Player()
+                print("Player 2, please enter your name.")
+                self.opponent.set_name()
                 break
             else:
                 print("Please choose (1) or (2)")
 
     def display_winner(self):
         if self.player.score == 2:
-            print("Player 1 wins!\n")
+            print(f"{self.player.name} wins!\n")
         if self.opponent.score == 2:
-            print("Player 2 wins!\n")
-
-rpsls = Game()
-rpsls.run_game()
-
+            print(f"{self.opponent.name} wins!\n")
