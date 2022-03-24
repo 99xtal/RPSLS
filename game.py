@@ -1,9 +1,10 @@
+from human import Human
 from player import Player
 from ai import AI
 
 class Game:
     def __init__(self):
-        self.player = Player()
+        self.player = Human()
         self.opponent = None
         self.combinations = {}
     
@@ -71,7 +72,7 @@ class Game:
                 self.opponent = AI()
                 break
             elif game_choice == "2":
-                self.opponent = Player()
+                self.opponent = Human()
                 print("Player 2, please enter your name.")
                 self.opponent.set_name()
                 break
