@@ -3,8 +3,8 @@ from ai import AI
 
 class Game:
     def __init__(self):
-        self.player = Human()
-        self.opponent = None
+        self.player = Human("Player 1")
+        self.opponent = Human("Player 2")
         self.combinations = {}
     
     def run_game(self):
@@ -22,12 +22,16 @@ class Game:
             self.player.choose_gesture()
             self.opponent.choose_gesture()
             winner = self.choose_winner()
-            if winner == None:
-                print(f'\nNobody wins!')
-            else:
-                print(f'\n{winner.name} won the round')
-                winner.score += 1
-                print(f'{winner.name} has a score of {winner.score}')
+            self.print_winner(winner)
+
+    def print_winner(self, winner):
+        if winner == None:
+            print(f'\nNobody wins!')
+        else:
+            print(f'\n{winner.name} won the round')
+            winner.score += 1
+            print(f'{winner.name} has a score of {winner.score}')
+
 
     def choose_winner(self):
         opt1 = self.player.gesture_choice
@@ -65,14 +69,11 @@ class Game:
     def choose_game_mode(self):
         while True:
             game_choice = input("Would you like a single player(1) or multiplayer game(2)? Type 1 or 2: ")
-            print("Player 1, please enter your name.")
             self.player.set_name()
             if game_choice == "1":
                 self.opponent = AI()
                 break
             elif game_choice == "2":
-                self.opponent = Human()
-                print("Player 2, please enter your name.")
                 self.opponent.set_name()
                 break
             else:
