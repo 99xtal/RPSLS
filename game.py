@@ -1,5 +1,4 @@
 from human import Human
-from player import Player
 from ai import AI
 
 class Game:
